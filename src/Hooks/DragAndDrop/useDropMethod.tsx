@@ -7,6 +7,9 @@ const useDropMethod = () => {
   const {folder, product} = ItemTypes
   const [, drop] = useDrop({
     accept: [folder, product],
+    drop: item => {
+      console.log(item, 'dragged element')
+    },
   })
 
   return {drop}
