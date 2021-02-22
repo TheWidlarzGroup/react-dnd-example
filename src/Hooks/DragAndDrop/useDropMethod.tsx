@@ -7,7 +7,8 @@ const useDropMethod = (location: string) => {
   const {folder, product} = ItemTypes
   const [, drop] = useDrop({
     accept: [folder, product],
-    drop: item => {
+    drop: (item, monitor) => {
+      if (monitor.didDrop()) return
       console.log(item, 'dragged element')
       console.log(location, 'location')
     },
