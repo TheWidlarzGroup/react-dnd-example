@@ -1,7 +1,14 @@
 /** @format */
+import Header from './Layout/Header'
+import Main from './Layout/Main'
 
 const App = () => {
-	return <h1>Shopping list</h1>
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  )
 }
 
 export default App
