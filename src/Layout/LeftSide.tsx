@@ -4,7 +4,7 @@ import {useEffect, useRef} from 'react'
 import ProductListItem from '../Components/ProductListItem'
 import useApi from '../Hooks/Api/useApi'
 import useMain from '../Hooks/useMain'
-import {ItemTypes} from '../Hooks/DragAndDrop/types'
+import {Dropzones, ItemTypes} from '../Hooks/DragAndDrop/types'
 import useDropMethod from '../Hooks/DragAndDrop/useDropMethod'
 
 const LeftSide = () => {
@@ -23,7 +23,7 @@ const LeftSide = () => {
   }, [data, setActiveFolder])
 
   const itemRef = useRef<HTMLDivElement>(null)
-  const {drop} = useDropMethod()
+  const {drop} = useDropMethod(Dropzones.left)
 
   drop(itemRef)
 

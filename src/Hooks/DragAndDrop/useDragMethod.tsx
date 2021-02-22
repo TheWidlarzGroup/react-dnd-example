@@ -3,10 +3,18 @@
 import {useDrag} from 'react-dnd'
 import {ItemTypes} from './types'
 
-const useDragMethod = (type: ItemTypes) => {
+const useDragMethod = (
+  id: string,
+  name: string,
+  type: ItemTypes,
+  folderId?: string,
+) => {
   const [, drag] = useDrag({
     item: {
       type,
+      id,
+      name,
+      folderId,
     },
   })
 

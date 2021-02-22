@@ -13,13 +13,13 @@ interface Props {
   folderId?: string
 }
 
-const ProductListItem: FC<Props> = ({id, name, type}) => {
+const ProductListItem: FC<Props> = ({id, name, type, folderId}) => {
   const {setActiveFolder} = useMain()
 
   const isFolder = type === ItemTypes.folder
 
   const itemRef = useRef<HTMLDivElement>(null)
-  const {drag} = useDragMethod(type)
+  const {drag} = useDragMethod(id, name, type, folderId)
 
   drag(itemRef)
 
