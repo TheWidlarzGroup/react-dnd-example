@@ -14,7 +14,7 @@ const RightSide = () => {
   } = useApi(activeFolder)
 
   const itemRef = useRef<HTMLDivElement>(null)
-  const {drop} = useDropMethod(Dropzones.right)
+  const {drop} = useDropMethod(Dropzones.right, activeFolder ?? undefined)
 
   drop(itemRef)
 

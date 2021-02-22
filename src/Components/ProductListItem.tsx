@@ -1,9 +1,10 @@
 /** @format */
 
 import {FC, useRef} from 'react'
-import {ItemTypes} from '../Hooks/DragAndDrop/types'
+import {Dropzones, ItemTypes} from '../Hooks/DragAndDrop/types'
 import useMain from '../Hooks/useMain'
 import useDragMethod from '../Hooks/DragAndDrop/useDragMethod'
+import useDropMethod from '../Hooks/DragAndDrop/useDropMethod'
 
 interface Props {
   id: string
@@ -17,11 +18,13 @@ const ProductListItem: FC<Props> = ({id, name, type, folderId}) => {
   const {setActiveFolder} = useMain()
 
   const isFolder = type === ItemTypes.folder
+  const location = isFolder ? Dropzones.left : Dropzones.right
 
   const itemRef = useRef<HTMLDivElement>(null)
   const {drag} = useDragMethod(id, name, type, folderId)
+  const {drop} = useDropMethod(location, isFolder ? id : undefined)
 
-  drag(itemRef)
+  drag(drop(itemRef))
 
   return (
     <div

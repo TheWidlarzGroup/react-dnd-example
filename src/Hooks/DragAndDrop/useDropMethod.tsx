@@ -4,12 +4,14 @@ import {useDrop} from 'react-dnd'
 import {DragItem, Dropzones, ItemTypes} from './types'
 import useApi from '../Api/useApi'
 
-const useDropMethod = (location: string) => {
+const useDropMethod = (location: string, targetId?: string) => {
   const {folder, product} = ItemTypes
   const {
     deleteProductFromFolder,
     deleteFolder,
     deleteProductFromUpperList,
+    putProductsInFolder,
+    postProductInFolder,
   } = useApi()
   const [, drop] = useDrop({
     accept: [folder, product],
@@ -31,6 +33,16 @@ const useDropMethod = (location: string) => {
               deleteProductFromUpperList({id})
             }
             break
+          }
+          if (targetId === undefined || folderId === targetId) return
+          if (folderId !== undefined) {
+            putProductsInFolder({
+              id,
+              folderId,
+              targetFolderId: targetId,
+            })
+          } else {
+            postProductInFolder({targetId, name})
           }
           break
       }
