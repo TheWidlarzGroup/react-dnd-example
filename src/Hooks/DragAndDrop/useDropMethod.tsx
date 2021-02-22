@@ -1,16 +1,39 @@
 /** @format */
 
 import {useDrop} from 'react-dnd'
-import {ItemTypes} from './types'
+import {DragItem, Dropzones, ItemTypes} from './types'
+import useApi from '../Api/useApi'
 
 const useDropMethod = (location: string) => {
   const {folder, product} = ItemTypes
+  const {
+    deleteProductFromFolder,
+    deleteFolder,
+    deleteProductFromUpperList,
+  } = useApi()
   const [, drop] = useDrop({
     accept: [folder, product],
-    drop: (item, monitor) => {
+    drop: (item: DragItem, monitor) => {
       if (monitor.didDrop()) return
-      console.log(item, 'dragged element')
-      console.log(location, 'location')
+
+      const {id, type, folderId, name} = item
+
+      switch (type) {
+        case folder:
+          if (location !== Dropzones.main) return
+          deleteFolder({id})
+          break
+        case product:
+          if (location === Dropzones.main) {
+            if (folderId !== undefined) {
+              deleteProductFromFolder({folderId, id})
+            } else {
+              deleteProductFromUpperList({id})
+            }
+            break
+          }
+          break
+      }
     },
   })
 
