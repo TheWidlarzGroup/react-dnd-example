@@ -46,6 +46,8 @@ const useDropMethod = (location: string, targetId?: string) => {
           }
           break
       }
+
+      return {location}
     },
   })
 

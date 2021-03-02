@@ -8,12 +8,13 @@ interface Props {
   id: string
   name: string
   type: ItemTypes
+  index: number
 }
 
-const ProductUpperListContainer: FC<Props> = ({id, name, type}) => {
+const ProductUpperListContainer: FC<Props> = ({id, name, type, index}) => {
   const itemRef = useRef<HTMLDivElement>(null)
 
-  const {drag} = useDragMethod(id, name, type)
+  const {drag} = useDragMethod(id, name, type, index)
 
   drag(itemRef)
   return (
