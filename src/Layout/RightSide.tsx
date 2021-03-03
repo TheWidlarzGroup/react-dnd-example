@@ -14,12 +14,19 @@ const RightSide = () => {
   } = useApi(activeFolder)
 
   const itemRef = useRef<HTMLDivElement>(null)
-  const {drop} = useDropMethod(Dropzones.right, activeFolder ?? undefined)
+  const {drop, isOver, draggedItemType} = useDropMethod(
+    Dropzones.right,
+    activeFolder ?? undefined,
+  )
 
   drop(itemRef)
 
   return (
-    <div className={`w-full`} ref={itemRef}>
+    <div
+      className={`w-full ${
+        isOver && draggedItemType !== ItemTypes.folder && 'bg-blue-600'
+      }`}
+      ref={itemRef}>
       {data?.map(({id, name}, index) => (
         <ProductListItem
           key={id}

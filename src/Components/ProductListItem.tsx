@@ -23,14 +23,22 @@ const ProductListItem: FC<Props> = ({id, name, type, folderId, index}) => {
 
   const itemRef = useRef<HTMLDivElement>(null)
   const {drag} = useDragMethod(id, name, type, index, folderId)
-  const {drop} = useDropMethod(location, isFolder ? id : undefined)
+  const {drop, isOver, draggedItemType} = useDropMethod(
+    location,
+    isFolder ? id : undefined,
+  )
   const {drop: hoverDrop} = useHoverMethod(itemRef, index, location)
 
   drag(drop(hoverDrop(itemRef)))
 
   return (
     <div
-      className={`w-full border border-solid border-gray-300 py-4 px-6 flex justify-between `}
+      className={`w-full border border-solid border-gray-300 py-4 px-6 flex justify-between ${
+        isOver &&
+        isFolder &&
+        draggedItemType !== ItemTypes.folder &&
+        'bg-green-500'
+      }`}
       onClick={() => isFolder && setActiveFolder(id)}
       ref={itemRef}>
       {name}

@@ -13,7 +13,7 @@ const useDropMethod = (location: string, targetId?: string) => {
     putProductsInFolder,
     postProductInFolder,
   } = useApi()
-  const [, drop] = useDrop({
+  const [{isOver, draggedItemType}, drop] = useDrop({
     accept: [folder, product],
     drop: (item: DragItem, monitor) => {
       if (monitor.didDrop()) return
@@ -49,9 +49,13 @@ const useDropMethod = (location: string, targetId?: string) => {
 
       return {location}
     },
+    collect: monitor => ({
+      isOver: monitor.isOver({shallow: true}),
+      draggedItemType: monitor.getItemType(),
+    }),
   })
 
-  return {drop}
+  return {drop, isOver, draggedItemType}
 }
 
 export default useDropMethod

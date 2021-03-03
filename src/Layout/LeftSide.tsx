@@ -23,13 +23,15 @@ const LeftSide = () => {
   }, [data, setActiveFolder])
 
   const itemRef = useRef<HTMLDivElement>(null)
-  const {drop} = useDropMethod(Dropzones.left)
+  const {drop, isOver} = useDropMethod(Dropzones.left)
 
   drop(itemRef)
 
   return (
     <div
-      className={`h-full w-1/5 border-r border-solid border-gray-300 relative `}
+      className={`h-full w-1/5 border-r border-solid border-gray-300 relative ${
+        isOver && 'bg-purple-500'
+      }`}
       ref={itemRef}>
       {data?.map((folder, index) => (
         <ProductListItem
