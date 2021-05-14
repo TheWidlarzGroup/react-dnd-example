@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# React DND example 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You build this app along with the guide from our [engineering blog](https://thewidlarzgroup.com/react-dnd-shopping-list/).
+It's hosted [right there](https://twg-dnd.netlify.app/).
+
+## Tech stack: 
+
+- React-dnd
+- MirageJS
+- React Query
+- TypeScript
 
 ## Available Scripts
 
